@@ -1,5 +1,8 @@
 /target/
 /data/local/
+/backend/target/
+/backend/data/local/
+/frontend/node_modules/
 *.db
 *.db-journal
 *.db-shm
