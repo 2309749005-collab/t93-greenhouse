@@ -27,8 +27,12 @@ class GreenhouseSmokeTest {
     }
 
     @Test
-    void backendDoesNotServeTheFrontendHomepage() {
-        assertThat(http.getForEntity("/", String.class).getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    void applicationServesTheFrontendHomepageAndAssets() {
+        var page = http.getForEntity("/", String.class);
+        assertThat(page.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(page.getBody()).contains("T93 智慧农业大棚", "/styles.css", "/app.js");
+        assertThat(http.getForEntity("/styles.css", String.class).getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(http.getForEntity("/app.js", String.class).getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
